@@ -1,0 +1,27 @@
+[
+  {
+    "query": "funny space adventure book",
+    "expected": ["Hitchhiker"],
+    "hint": "SYNONYM"
+  },
+  {
+    "query": "desert planet science fiction",
+    "expected": ["Dune"],
+    "hint": null
+  },
+  {
+    "query": "android dystopia movie",
+    "expected": ["Blade Runner"],
+    "hint": "SYNONYM"
+  },
+  {
+    "query": "Brettspiel mit Handel und Rohstoffen",
+    "expected": ["Catan"],
+    "hint": "LANG"
+  },
+  {
+    "query": "Japanese temples walking tour",
+    "expected": ["Kyoto"],
+    "hint": null
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "game-001",
+    "title": "Settlers of Catan",
+    "text": "A multiplayer board game of resource trading and settlement building on a modular hex-tile island.",
+    "tags": [
+      "strategy",
+      "multiplayer",
+      { "name": "Brettspiel", "translation": "board game tabletop" }
+    ],
+    "fields": [
+      { "label": "Players", "value": "3-4 players, 5-6 with expansion" },
+      { "label": "Duration", "value": "60-120 minutes" },
+      { "label": "Category", "value": "Euro-style strategy" }
+    ]
+  },
+  {
+    "id": "travel-001",
+    "title": "Kyoto Temple Trail",
+    "text": "A curated walking route through Kyoto's most iconic Buddhist temples and Shinto shrines, including Kinkaku-ji and Fushimi Inari.",
+    "tags": [
+      "japan",
+      "cultural",
+      "walking",
+      { "name": "Tempel", "translation": "temple shrine sacred" }
+    ],
+    "fields": [
+      { "label": "Region", "value": "Kansai, Japan" },
+      { "label": "Duration", "value": "Full day, 8-10 hours" },
+      { "label": "Difficulty", "value": "Easy to moderate" }
+    ]
+  },
+  {
+    "id": "gadget-001",
+    "title": "Solar-Powered Trail Speaker",
+    "text": "A rugged, waterproof Bluetooth speaker with an integrated solar panel for extended off-grid listening during hikes and camping trips.",
+    "tags": [
+      "outdoor",
+      "bluetooth",
+      "portable"
+    ],
+    "fields": [
+      { "label": "Battery", "value": "20 hours playback, solar extends indefinitely" },
+      { "label": "Weight", "value": "340g" },
+      { "label": "Rating", "value": "IP67 waterproof" }
+    ]
+  }
+]

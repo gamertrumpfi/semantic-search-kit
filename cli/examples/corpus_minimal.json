@@ -1,0 +1,17 @@
+[
+  {
+    "id": "book-001",
+    "title": "The Hitchhiker's Guide to the Galaxy",
+    "text": "A comedic science fiction novel following Arthur Dent's misadventures through space after Earth's demolition. Features absurdist humor, the number 42, and an electronic guidebook."
+  },
+  {
+    "id": "book-002",
+    "title": "Dune",
+    "text": "An epic science fiction saga set on the desert planet Arrakis. Follows Paul Atreides as he navigates political intrigue, giant sandworms, and the spice melange that controls interstellar travel."
+  },
+  {
+    "id": "movie-001",
+    "title": "Blade Runner",
+    "text": "A neo-noir science fiction film set in a dystopian future Los Angeles. A blade runner must pursue and terminate four replicants who have escaped to Earth seeking longer lifespans."
+  }
+]

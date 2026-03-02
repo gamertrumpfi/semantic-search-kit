@@ -1,0 +1,60 @@
+Semantic Search Kit — Third-Party Notices
+=========================================
+
+This project uses the following open-source software:
+
+
+1. intfloat/multilingual-e5-small
+   License: MIT
+   Copyright (c) Microsoft Corporation
+   https://huggingface.co/intfloat/multilingual-e5-small
+
+2. intfloat/multilingual-e5-large-instruct (teacher model)
+   License: MIT
+   Copyright (c) Microsoft Corporation
+   https://huggingface.co/intfloat/multilingual-e5-large-instruct
+
+3. swift-transformers
+   License: Apache-2.0
+   Copyright (c) 2022 Hugging Face SAS
+   https://github.com/huggingface/swift-transformers
+
+4. coremltools
+   License: BSD-3-Clause
+   Copyright (c) 2020-2024 Apple Inc.
+   https://github.com/apple/coremltools
+
+5. sentence-transformers
+   License: Apache-2.0
+   Copyright (c) 2019 Nils Reimers
+   https://github.com/UKPLab/sentence-transformers
+
+6. PyTorch
+   License: BSD-3-Clause
+   Copyright (c) Facebook, Inc. and its affiliates
+   https://github.com/pytorch/pytorch
+
+7. Hugging Face Transformers
+   License: Apache-2.0
+   Copyright (c) 2018- The Hugging Face team
+   https://github.com/huggingface/transformers
+
+8. Typer
+   License: MIT
+   Copyright (c) 2019 Sebastian Ramirez
+   https://github.com/tiangolo/typer
+
+9. Rich
+   License: MIT
+   Copyright (c) 2020 Will McGugan
+   https://github.com/Textualize/rich
+
+10. Pydantic
+     License: MIT
+     Copyright (c) 2017-present Samuel Colvin
+     https://github.com/pydantic/pydantic
+
+11. NumPy
+    License: BSD-3-Clause
+    Copyright (c) 2005-2024 NumPy Developers
+    https://github.com/numpy/numpy

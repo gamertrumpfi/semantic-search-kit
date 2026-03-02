@@ -1,0 +1,289 @@
+[
+  {
+    "id": "book-001",
+    "title": "The Hitchhiker's Guide to the Galaxy",
+    "text": "A comedic science fiction novel following Arthur Dent's misadventures through space after Earth's demolition. Features absurdist humor, the answer 42, a depressed robot named Marvin, and an electronic guidebook covering the galaxy.",
+    "tags": ["science-fiction", "comedy", "classic", "british"],
+    "fields": [
+      {"label": "Author", "value": "Douglas Adams"},
+      {"label": "Year", "value": "1979"},
+      {"label": "Category", "value": "Novel"}
+    ]
+  },
+  {
+    "id": "book-002",
+    "title": "Dune",
+    "text": "An epic science fiction saga set on the desert planet Arrakis. Paul Atreides navigates political intrigue among noble houses, giant sandworms, and the spice melange that enables interstellar travel and prescience.",
+    "tags": ["science-fiction", "epic", "political"],
+    "fields": [
+      {"label": "Author", "value": "Frank Herbert"},
+      {"label": "Year", "value": "1965"},
+      {"label": "Category", "value": "Novel"}
+    ]
+  },
+  {
+    "id": "book-003",
+    "title": "Pride and Prejudice",
+    "text": "A romantic novel of manners set in Regency-era England. Elizabeth Bennet and Mr. Darcy overcome pride, prejudice, and social expectations to find love, amid matchmaking mothers and witty social commentary.",
+    "tags": ["romance", "classic", "british"],
+    "fields": [
+      {"label": "Author", "value": "Jane Austen"},
+      {"label": "Year", "value": "1813"},
+      {"label": "Category", "value": "Novel"}
+    ]
+  },
+  {
+    "id": "book-004",
+    "title": "Neuromancer",
+    "text": "A cyberpunk novel about Case, a washed-up computer hacker hired for one last job in cyberspace. Features artificial intelligence, virtual reality, mega-corporations, and the dark underbelly of a high-tech future.",
+    "tags": ["science-fiction", "cyberpunk", "thriller"],
+    "fields": [
+      {"label": "Author", "value": "William Gibson"},
+      {"label": "Year", "value": "1984"},
+      {"label": "Category", "value": "Novel"}
+    ]
+  },
+  {
+    "id": "book-005",
+    "title": "The Great Gatsby",
+    "text": "A tragic tale of wealth, obsession, and the American Dream in 1920s New York. Jay Gatsby throws lavish parties hoping to reunite with his lost love Daisy Buchanan, narrated by the observant Nick Carraway.",
+    "tags": ["classic", "tragedy", "american"],
+    "fields": [
+      {"label": "Author", "value": "F. Scott Fitzgerald"},
+      {"label": "Year", "value": "1925"},
+      {"label": "Category", "value": "Novel"}
+    ]
+  },
+  {
+    "id": "movie-001",
+    "title": "Blade Runner",
+    "text": "A neo-noir science fiction film set in a dystopian 2019 Los Angeles. Rick Deckard, a blade runner, must pursue and terminate four replicants who have escaped to Earth seeking longer lifespans. Explores what it means to be human.",
+    "tags": ["science-fiction", "neo-noir", "dystopian"],
+    "fields": [
+      {"label": "Director", "value": "Ridley Scott"},
+      {"label": "Year", "value": "1982"},
+      {"label": "Category", "value": "Film"}
+    ]
+  },
+  {
+    "id": "movie-002",
+    "title": "Spirited Away",
+    "text": "An animated fantasy film where ten-year-old Chihiro enters a magical world of spirits and gods after her parents are transformed into pigs. She works in a bathhouse run by the witch Yubaba to save her family.",
+    "tags": ["animation", "fantasy", "japanese"],
+    "fields": [
+      {"label": "Director", "value": "Hayao Miyazaki"},
+      {"label": "Year", "value": "2001"},
+      {"label": "Category", "value": "Film"},
+      {"label": "Studio", "value": "Studio Ghibli"}
+    ]
+  },
+  {
+    "id": "movie-003",
+    "title": "The Shawshank Redemption",
+    "text": "A drama about banker Andy Dufresne, sentenced to life in Shawshank prison for a crime he did not commit. Over two decades he forms a friendship with Red and quietly engineers an elaborate escape plan.",
+    "tags": ["drama", "prison", "hope"],
+    "fields": [
+      {"label": "Director", "value": "Frank Darabont"},
+      {"label": "Year", "value": "1994"},
+      {"label": "Category", "value": "Film"}
+    ]
+  },
+  {
+    "id": "movie-004",
+    "title": "Inception",
+    "text": "A mind-bending thriller about Dom Cobb, a thief who infiltrates dreams to steal secrets. He is offered a chance to have his criminal record erased if he can perform inception: planting an idea in someone's subconscious.",
+    "tags": ["science-fiction", "thriller", "action"],
+    "fields": [
+      {"label": "Director", "value": "Christopher Nolan"},
+      {"label": "Year", "value": "2010"},
+      {"label": "Category", "value": "Film"}
+    ]
+  },
+  {
+    "id": "movie-005",
+    "title": "Amélie",
+    "text": "A whimsical French romantic comedy about a shy waitress in Montmartre who decides to change the lives of those around her for the better, while navigating her own quest for love and connection.",
+    "tags": ["romance", "comedy", "french"],
+    "fields": [
+      {"label": "Director", "value": "Jean-Pierre Jeunet"},
+      {"label": "Year", "value": "2001"},
+      {"label": "Category", "value": "Film"}
+    ]
+  },
+  {
+    "id": "game-001",
+    "title": "Settlers of Catan",
+    "text": "A multiplayer board game of resource trading and settlement building on a modular hex-tile island. Players compete to reach ten victory points by building roads, settlements, and cities while trading resources.",
+    "tags": ["strategy", "multiplayer", {"name": "Brettspiel", "translation": "board game tabletop"}],
+    "fields": [
+      {"label": "Players", "value": "3-4 players, 5-6 with expansion"},
+      {"label": "Duration", "value": "60-120 minutes"},
+      {"label": "Category", "value": "Euro-style strategy"}
+    ]
+  },
+  {
+    "id": "game-002",
+    "title": "Pandemic",
+    "text": "A cooperative board game where players work together as disease-fighting specialists to contain four deadly outbreaks spreading across the globe. Requires teamwork, strategic planning, and resource management.",
+    "tags": ["cooperative", "strategy", {"name": "Kooperativ", "translation": "cooperative teamwork"}],
+    "fields": [
+      {"label": "Players", "value": "2-4 players"},
+      {"label": "Duration", "value": "45-60 minutes"},
+      {"label": "Category", "value": "Cooperative strategy"}
+    ]
+  },
+  {
+    "id": "game-003",
+    "title": "Ticket to Ride",
+    "text": "A cross-country train adventure board game. Players collect cards of various train car types to claim railway routes connecting cities across a map, earning points for completed destination tickets.",
+    "tags": ["family", "trains", "route-building"],
+    "fields": [
+      {"label": "Players", "value": "2-5 players"},
+      {"label": "Duration", "value": "30-60 minutes"},
+      {"label": "Category", "value": "Family strategy"}
+    ]
+  },
+  {
+    "id": "game-004",
+    "title": "Codenames",
+    "text": "A word-based party game for two teams. Spymasters give one-word clues to help their teammates identify secret agents from a grid of words, while avoiding the assassin card that ends the game instantly.",
+    "tags": ["party", "word-game", "team"],
+    "fields": [
+      {"label": "Players", "value": "4-8 players"},
+      {"label": "Duration", "value": "15-30 minutes"},
+      {"label": "Category", "value": "Party game"}
+    ]
+  },
+  {
+    "id": "travel-001",
+    "title": "Kyoto Temple Trail",
+    "text": "A curated walking route through Kyoto's most iconic Buddhist temples and Shinto shrines, including the golden Kinkaku-ji, bamboo groves of Arashiyama, and the thousand vermillion torii gates of Fushimi Inari.",
+    "tags": ["japan", "cultural", "walking", {"name": "Tempel", "translation": "temple shrine sacred"}],
+    "fields": [
+      {"label": "Region", "value": "Kansai, Japan"},
+      {"label": "Duration", "value": "Full day, 8-10 hours"},
+      {"label": "Difficulty", "value": "Easy to moderate"}
+    ]
+  },
+  {
+    "id": "travel-002",
+    "title": "Patagonia Glacier Trek",
+    "text": "A multi-day hiking expedition through the dramatic landscapes of Torres del Paine in Chilean Patagonia. Features glacier crossings, turquoise lakes, granite towers, and pristine wilderness far from civilization.",
+    "tags": ["hiking", "adventure", "wilderness"],
+    "fields": [
+      {"label": "Region", "value": "Magallanes, Chile"},
+      {"label": "Duration", "value": "4-7 days"},
+      {"label": "Difficulty", "value": "Challenging"}
+    ]
+  },
+  {
+    "id": "travel-003",
+    "title": "Amalfi Coast Road Trip",
+    "text": "A scenic driving itinerary along Italy's stunning Amalfi coastline. Cliffside villages, Mediterranean cuisine, lemon groves, and turquoise waters from Sorrento through Positano and Ravello to Amalfi town.",
+    "tags": ["italy", "coastal", "scenic", {"name": "Mittelmeer", "translation": "Mediterranean sea coast"}],
+    "fields": [
+      {"label": "Region", "value": "Campania, Italy"},
+      {"label": "Duration", "value": "3-5 days"},
+      {"label": "Difficulty", "value": "Easy (driving)"}
+    ]
+  },
+  {
+    "id": "travel-004",
+    "title": "Marrakech Medina Experience",
+    "text": "An immersive cultural guide to exploring Marrakech's ancient medina. Navigate the labyrinthine souks, visit ornate palaces and riads, sample street food at Jemaa el-Fnaa square, and discover artisan workshops.",
+    "tags": ["morocco", "cultural", "urban"],
+    "fields": [
+      {"label": "Region", "value": "Marrakech-Safi, Morocco"},
+      {"label": "Duration", "value": "2-3 days"},
+      {"label": "Difficulty", "value": "Easy"}
+    ]
+  },
+  {
+    "id": "gadget-001",
+    "title": "Solar-Powered Trail Speaker",
+    "text": "A rugged, waterproof Bluetooth speaker with an integrated solar panel for extended off-grid listening. Designed for hiking and camping with a carabiner clip, dustproof housing, and 20-hour battery life.",
+    "tags": ["outdoor", "bluetooth", "portable"],
+    "fields": [
+      {"label": "Battery", "value": "20 hours playback, solar extends indefinitely"},
+      {"label": "Weight", "value": "340g"},
+      {"label": "Rating", "value": "IP67 waterproof"}
+    ]
+  },
+  {
+    "id": "gadget-002",
+    "title": "E-Ink Sketch Tablet",
+    "text": "A paper-like digital drawing tablet using electronic ink display technology. Zero eye strain, weeks of battery life, and a responsive stylus that feels like writing on real paper. Syncs notes to cloud.",
+    "tags": ["e-ink", "drawing", "note-taking"],
+    "fields": [
+      {"label": "Display", "value": "10.3 inch E-Ink Carta"},
+      {"label": "Battery", "value": "3 weeks typical use"},
+      {"label": "Weight", "value": "385g"}
+    ]
+  },
+  {
+    "id": "gadget-003",
+    "title": "Noise-Cancelling Sleep Earbuds",
+    "text": "Ultra-compact wireless earbuds designed specifically for sleeping. Active noise cancellation blocks snoring and traffic noise. Built-in white noise generator and alarm that only you can hear.",
+    "tags": ["audio", "sleep", "wireless"],
+    "fields": [
+      {"label": "Battery", "value": "10 hours per charge"},
+      {"label": "Weight", "value": "2.5g per earbud"},
+      {"label": "Rating", "value": "IPX4 sweat resistant"}
+    ]
+  },
+  {
+    "id": "gadget-004",
+    "title": "Mechanical Keyboard Travel Case",
+    "text": "A compact 65% mechanical keyboard with hot-swappable switches, RGB backlighting, and a built-in hard-shell travel case. USB-C and Bluetooth dual connectivity for desk and mobile use.",
+    "tags": ["keyboard", "mechanical", "portable"],
+    "fields": [
+      {"label": "Layout", "value": "65% compact (67 keys)"},
+      {"label": "Connectivity", "value": "USB-C + Bluetooth 5.2"},
+      {"label": "Battery", "value": "200 hours wireless"}
+    ]
+  },
+  {
+    "id": "gadget-005",
+    "title": "Handheld Retro Gaming Console",
+    "text": "A pocket-sized emulation device pre-loaded with classic 8-bit and 16-bit games. Features a 3.5-inch IPS display, physical D-pad and buttons, save states, and a nostalgic design inspired by the Game Boy.",
+    "tags": ["gaming", "retro", "portable"],
+    "fields": [
+      {"label": "Display", "value": "3.5 inch IPS 640x480"},
+      {"label": "Battery", "value": "6-8 hours"},
+      {"label": "Storage", "value": "32GB microSD included"}
+    ]
+  },
+  {
+    "id": "book-006",
+    "title": "Sapiens: A Brief History of Humankind",
+    "text": "A sweeping narrative of human history from the emergence of Homo sapiens in Africa to the present day. Explores cognitive, agricultural, and scientific revolutions that shaped civilizations and our modern world.",
+    "tags": ["non-fiction", "history", "anthropology"],
+    "fields": [
+      {"label": "Author", "value": "Yuval Noah Harari"},
+      {"label": "Year", "value": "2011"},
+      {"label": "Category", "value": "Non-fiction"}
+    ]
+  },
+  {
+    "id": "movie-006",
+    "title": "Parasite",
+    "text": "A South Korean dark comedy thriller about the impoverished Kim family who scheme to infiltrate the wealthy Park household by posing as unrelated, highly qualified workers. A sharp commentary on class inequality.",
+    "tags": ["thriller", "dark-comedy", "korean"],
+    "fields": [
+      {"label": "Director", "value": "Bong Joon-ho"},
+      {"label": "Year", "value": "2019"},
+      {"label": "Category", "value": "Film"}
+    ]
+  },
+  {
+    "id": "travel-005",
+    "title": "Northern Lights Safari",
+    "text": "A winter expedition to see the aurora borealis in Norwegian Lapland. Includes husky sledding, ice fishing, staying in glass igloos, and Sami cultural experiences under the dancing green skies.",
+    "tags": ["norway", "winter", "aurora", {"name": "Nordlicht", "translation": "northern lights aurora borealis"}],
+    "fields": [
+      {"label": "Region", "value": "Troms, Norway"},
+      {"label": "Duration", "value": "3-5 nights"},
+      {"label": "Season", "value": "October to March"}
+    ]
+  }
+]
