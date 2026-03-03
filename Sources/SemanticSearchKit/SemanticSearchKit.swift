@@ -64,6 +64,10 @@ public enum SemanticSearchKit {
 package final class Configuration: Sendable {
 
     package static let shared = Configuration()
+    private static let logger = Logger(
+        subsystem: "com.semanticsearchkit",
+        category: "Configuration"
+    )
 
     // MARK: - Lock-protected state
 
@@ -108,6 +112,13 @@ package final class Configuration: Sendable {
                 )
                 return
             }
+
+            if embeddingsFileName.hasSuffix(".json") {
+                Self.logger.warning(
+                    "SemanticSearchKit.configure() received embeddingsFileName '\(embeddingsFileName)' ending in '.json'. Pass the base name without extension (e.g. 'embeddings_index'). EmbeddingStorage appends '.json' automatically."
+                )
+            }
+
             state.configured = true
             state.modelName = modelName
             state.bundle = bundle

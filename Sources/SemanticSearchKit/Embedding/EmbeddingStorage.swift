@@ -94,13 +94,19 @@ public actor EmbeddingStorage: EmbeddingProviding {
 // MARK: - Errors
 
 /// Errors thrown by ``EmbeddingStorage``.
-public enum EmbeddingStorageError: Error, LocalizedError, Sendable {
+public enum EmbeddingStorageError: Error, LocalizedError, Sendable, Equatable {
     /// The embedding index file was not found in the bundle.
     case fileNotFoundInBundle(fileName: String)
 
     public var errorDescription: String? {
         switch self {
         case .fileNotFoundInBundle(let name):
+            if name.hasSuffix(".json") {
+                return "\(name).json not found in app bundle. "
+                    + "Hint: embeddingsFileName should not include the '.json' extension. "
+                    + "Pass the base name (for example, 'embeddings_index') because EmbeddingStorage appends '.json' automatically."
+            }
+
             return "\(name).json not found in app bundle. "
                 + "Generate it with `ssk embed` and add it to your Xcode target's resources."
         }
