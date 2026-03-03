@@ -6,11 +6,13 @@ import Foundation
 /// documents.
 ///
 /// This is the fallback / complementary signal in the hybrid search pipeline.
-/// Each query term is matched against the document's ``SemanticSearchable/searchableText``
+/// Each query term is matched against the document's ``SemanticSearchable/searchableFields``
 /// using case-insensitive substring containment.
 ///
-/// Earlier query terms receive higher weights on the assumption that a user's
-/// first words carry the most intent:
+/// ### Two scoring dimensions
+///
+/// **Term position weight** — earlier query terms receive higher weights on the
+/// assumption that a user's first words carry the most intent:
 ///
 /// | Position | Weight |
 /// |----------|--------|
@@ -18,6 +20,16 @@ import Foundation
 /// | 2nd term | 2.5    |
 /// | 3rd term | 2.0    |
 /// | 4th+     | 1.0    |
+///
+/// **Field weight** — each ``SearchableField`` carries a `weight` multiplier.
+/// A match in a high-weight field (e.g. title) contributes more than a match
+/// in a low-weight field (e.g. description). When a term matches multiple
+/// fields, only the highest-weighted field counts (no double-dipping).
+///
+/// The raw score for a document is:
+/// ```
+/// score = sum over matched terms of (termWeight × bestFieldWeight)
+/// ```
 ///
 /// ## Usage
 ///
@@ -27,17 +39,6 @@ import Foundation
 /// // scores: [(item: Product, score: Double)] sorted descending
 /// ```
 package struct KeywordScorer: Sendable {
-
-    // MARK: - Term position weights
-
-    /// Weight for the first query term (strongest intent signal).
-    private static let firstTermWeight = 3.0
-    /// Weight for the second query term.
-    private static let secondTermWeight = 2.5
-    /// Weight for the third query term.
-    private static let thirdTermWeight = 2.0
-    /// Weight for the fourth and subsequent query terms.
-    private static let remainingTermWeight = 1.0
 
     package init() {}
 
@@ -66,12 +67,22 @@ package struct KeywordScorer: Sendable {
         var results: [(item: Document, score: Double)] = []
 
         for document in documents {
-            let text = document.searchableText.lowercased()
+            let fields = document.searchableFields
             var score = 0.0
 
             for (index, term) in terms.enumerated() {
-                guard text.contains(term) else { continue }
-                score += Self.weight(forTermAt: index)
+                // Find the best (highest-weight) field that contains this term.
+                var bestFieldWeight = 0.0
+                for field in fields {
+                    guard field.weight > bestFieldWeight else { continue }
+                    if field.text.lowercased().contains(term) {
+                        bestFieldWeight = field.weight
+                    }
+                }
+
+                if bestFieldWeight > 0 {
+                    score += Self.weight(forTermAt: index) * bestFieldWeight
+                }
             }
 
             if score > 0 {
@@ -117,10 +128,10 @@ package struct KeywordScorer: Sendable {
     /// Earlier terms are assumed to carry stronger intent.
     private static func weight(forTermAt index: Int) -> Double {
         switch index {
-        case 0:  return firstTermWeight
-        case 1:  return secondTermWeight
-        case 2:  return thirdTermWeight
-        default: return remainingTermWeight
+        case 0:  return 3.0
+        case 1:  return 2.5
+        case 2:  return 2.0
+        default: return 1.0
         }
     }
 }

@@ -130,4 +130,96 @@ struct KeywordScorerTests {
         #expect(scores.isEmpty)
         #expect(matchCount == 0)
     }
+
+    // MARK: - Field-weighted scoring
+
+    @Test("Field weight multiplies term weight")
+    func fieldWeightMultipliesTermWeight() {
+        // Single item with title (weight 3.0) and description (weight 1.0).
+        // "pasta" appears only in the title field.
+        let items = [
+            TestItem(id: "a", fields: [
+                SearchableField(text: "pasta carbonara", weight: 3.0),
+                SearchableField(text: "a classic Italian dish", weight: 1.0),
+            ])
+        ]
+        let results = sut.scores(for: "pasta", in: items)
+        #expect(results.count == 1)
+        // 1st term weight (3.0) × field weight (3.0) = 9.0
+        #expect(abs(results[0].score - 9.0) < 1e-10)
+    }
+
+    @Test("Best field weight wins when term matches multiple fields")
+    func bestFieldWeightWins() {
+        // "chicken" appears in both title (weight 3.0) and description (weight 1.0).
+        // Only the highest field weight should count.
+        let items = [
+            TestItem(id: "a", fields: [
+                SearchableField(text: "chicken tikka", weight: 3.0),
+                SearchableField(text: "spicy chicken curry", weight: 1.0),
+            ])
+        ]
+        let results = sut.scores(for: "chicken", in: items)
+        #expect(results.count == 1)
+        // 1st term weight (3.0) × best field weight (3.0) = 9.0
+        #expect(abs(results[0].score - 9.0) < 1e-10)
+    }
+
+    @Test("Field weights change ranking order")
+    func fieldWeightsChangeRanking() {
+        // Two items both match "pasta". Item A has it in a high-weight field,
+        // item B has it in a low-weight field.
+        let items = [
+            TestItem(id: "title-match", fields: [
+                SearchableField(text: "pasta bolognese", weight: 3.0),
+                SearchableField(text: "hearty Italian dinner", weight: 1.0),
+            ]),
+            TestItem(id: "desc-match", fields: [
+                SearchableField(text: "Italian dinner", weight: 3.0),
+                SearchableField(text: "served with fresh pasta", weight: 1.0),
+            ]),
+        ]
+        let results = sut.scores(for: "pasta", in: items)
+        #expect(results.count == 2)
+        // title-match: 3.0 × 3.0 = 9.0
+        // desc-match:  3.0 × 1.0 = 3.0
+        #expect(results[0].item.id == "title-match")
+        #expect(results[1].item.id == "desc-match")
+    }
+
+    @Test("Default field weight of 1.0 preserves backward compatibility")
+    func defaultFieldWeightBackwardCompat() {
+        // TestItem without custom fields uses the default (single field, weight 1.0).
+        // Score should equal the plain term weight sum.
+        let items = [TestItem(id: "plain", title: "alpha beta gamma delta")]
+        let results = sut.scores(for: "alpha beta gamma delta", in: items)
+        #expect(results.count == 1)
+        // 3.0 + 2.5 + 2.0 + 1.0 = 8.5 (same as before field weights existed)
+        #expect(abs(results[0].score - 8.5) < 1e-10)
+    }
+
+    @Test("Multi-term query with mixed field matches scores correctly")
+    func multiTermMixedFields() {
+        // "chicken" in title (weight 2.0), "spicy" in tags (weight 1.5)
+        let items = [
+            TestItem(id: "a", fields: [
+                SearchableField(text: "chicken tikka", weight: 2.0),
+                SearchableField(text: "spicy Indian", weight: 1.5),
+                SearchableField(text: "a classic dish", weight: 1.0),
+            ])
+        ]
+        let results = sut.scores(for: "chicken spicy", in: items)
+        #expect(results.count == 1)
+        // "chicken": 1st term (3.0) × field (2.0) = 6.0
+        // "spicy":   2nd term (2.5) × field (1.5) = 3.75
+        // Total = 9.75
+        #expect(abs(results[0].score - 9.75) < 1e-10)
+    }
+
+    @Test("Empty fields array produces zero score")
+    func emptyFieldsArray() {
+        let items = [TestItem(id: "empty", fields: [])]
+        let results = sut.scores(for: "anything", in: items)
+        #expect(results.isEmpty)
+    }
 }
