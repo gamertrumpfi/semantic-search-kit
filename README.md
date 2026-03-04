@@ -26,18 +26,23 @@ The Python CLI trains a small student model (e.g. multilingual-e5-small, 118M pa
 ### 1. Train and export a model
 
 ```bash
-pip install semantic-search-kit
+# Clone and install the CLI
+git clone https://github.com/gamertrumpfi/semantic-search-kit.git
+cd semantic-search-kit
+pip install -e ./cli
 
+# Run the full pipeline
 ssk run \
-  --corpus my_corpus.json \
-  --queries my_queries.json \
-  --output ./output/ \
-  --name "MyAppSearch"
+  -c my_corpus.json \
+  -q my_queries.json \
+  -o ./output/ \
+  -n "MyAppSearch"
 ```
 
 This produces:
 - `MyAppSearch.mlpackage` -- CoreML model for Xcode
 - `embeddings_index.json` -- pre-computed document embeddings for the app bundle
+- `tokenizer.json` + `tokenizer_config.json` -- tokenizer files for on-device query encoding
 
 ### 2. Integrate into your app
 
@@ -47,12 +52,22 @@ Add the Swift package dependency:
 .package(url: "https://github.com/gamertrumpfi/semantic-search-kit", from: "0.1.0")
 ```
 
+Add the following files to your app target's bundle resources:
+- `MyAppSearch.mlpackage`
+- `embeddings_index.json`
+- `tokenizer.json`
+- `tokenizer_config.json`
+
 Configure once at app launch:
 
 ```swift
 import SemanticSearchKit
 
-SemanticSearchKit.configure(modelName: "MyAppSearch", bundle: .main)
+SemanticSearchKit.configure(
+    modelName: "MyAppSearch",
+    bundle: .main,
+    embeddingsFileName: "embeddings_index"  // base name, without .json
+)
 ```
 
 Conform your type:
@@ -65,6 +80,27 @@ struct Product: SemanticSearchable {
 
     var searchID: String { id }
     var searchableText: String { "\(name) \(description)" }
+}
+```
+
+For field-weighted keyword scoring, override `searchableFields`:
+
+```swift
+struct Product: SemanticSearchable {
+    let id: String
+    let name: String
+    let category: String
+    let description: String
+
+    var searchID: String { id }
+    var searchableText: String { "\(name) \(category) \(description)" }
+    var searchableFields: [SearchableField] {
+        [
+            SearchableField(text: name, weight: 3.0),
+            SearchableField(text: category, weight: 2.0),
+            SearchableField(text: description, weight: 1.0),
+        ]
+    }
 }
 ```
 
@@ -162,7 +198,7 @@ The training pipeline uses dual-loss knowledge distillation:
 | Component | Requirement |
 |-----------|-------------|
 | Swift Package | iOS 16+, macOS 13+, Swift 6.0 |
-| Python CLI | Python 3.10+, PyTorch, sentence-transformers, coremltools |
+| Python CLI | Python 3.10+, torch 2.4, transformers 4.57, coremltools 8.1, numpy 1.26 |
 
 ## Project Structure
 
@@ -179,6 +215,45 @@ semantic-search-kit/
   NOTICES
   LICENSE
 ```
+
+## Known Limitations
+
+### CoreML export requires specific library versions
+
+The `ssk export` command uses `torch.jit.trace` + `coremltools.convert()` to produce the `.mlpackage`. This combination is sensitive to library versions:
+
+| Library | Tested (working) | Known issues with |
+|---|---|---|
+| torch | 2.4.0 | 2.10+ (with coremltools 9.0) |
+| transformers | 4.57.x | 5.x (emits unsupported `aten::new_ones` op) |
+| coremltools | 8.1 | 9.0 (numpy 2.x compat bugs in MIL converter) |
+| numpy | 1.26.x | 2.x (breaks coremltools internal array construction) |
+
+We investigated using `torch.export` (the modern replacement for `torch.jit.trace`) which avoids all three coremltools bugs. While it produces correct results in Python (0.999998 cosine similarity), the exported `.mlpackage` produces incorrect embeddings when compiled by Xcode to `.mlmodelc`. This appears to be a coremltools/Xcode compiler issue with the different MIL graph structure from `torch.export`.
+
+**Recommendation**: Use the tested library versions above until coremltools adds explicit `torch.export` support.
+
+### Pre-computed embeddings only
+
+Document embeddings are pre-computed by the CLI and shipped in the app bundle as `embeddings_index.json`. New documents added at runtime are invisible to semantic search until the embeddings file is regenerated and the app is updated.
+
+### Single model architecture
+
+Currently optimised for E5-family models (multilingual-e5-small as student, multilingual-e5-large-instruct as teacher). Other model architectures may work but are untested.
+
+## Roadmap
+
+### On-device embedding generation
+
+Allow new documents to be embedded on-device at runtime using the bundled CoreML model, so they become immediately searchable without shipping a new `embeddings_index.json`.
+
+### Configurable model architectures
+
+Support pluggable teacher/student model pairs beyond E5, including models with different tokenizers (BPE, WordPiece) and embedding dimensions.
+
+### CI version matrix
+
+Automated testing of `ssk export` against multiple library version combinations to catch breakages early when dependencies update.
 
 ## License
 
