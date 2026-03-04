@@ -180,6 +180,45 @@ semantic-search-kit/
   LICENSE
 ```
 
+## Known Limitations
+
+### CoreML export requires specific library versions
+
+The `ssk export` command uses `torch.jit.trace` + `coremltools.convert()` to produce the `.mlpackage`. This combination is sensitive to library versions:
+
+| Library | Tested (working) | Known issues with |
+|---|---|---|
+| torch | 2.4.0 | 2.10+ (with coremltools 9.0) |
+| transformers | 4.57.x | 5.x (emits unsupported `aten::new_ones` op) |
+| coremltools | 8.1 | 9.0 (numpy 2.x compat bugs in MIL converter) |
+| numpy | 1.26.x | 2.x (breaks coremltools internal array construction) |
+
+We investigated using `torch.export` (the modern replacement for `torch.jit.trace`) which avoids all three coremltools bugs. While it produces correct results in Python (0.999998 cosine similarity), the exported `.mlpackage` produces incorrect embeddings when compiled by Xcode to `.mlmodelc`. This appears to be a coremltools/Xcode compiler issue with the different MIL graph structure from `torch.export`.
+
+**Recommendation**: Use the tested library versions above until coremltools adds explicit `torch.export` support.
+
+### Pre-computed embeddings only
+
+Document embeddings are pre-computed by the CLI and shipped in the app bundle as `embeddings_index.json`. New documents added at runtime are invisible to semantic search until the embeddings file is regenerated and the app is updated.
+
+### Single model architecture
+
+Currently optimised for E5-family models (multilingual-e5-small as student, multilingual-e5-large-instruct as teacher). Other model architectures may work but are untested.
+
+## Roadmap
+
+### On-device embedding generation
+
+Allow new documents to be embedded on-device at runtime using the bundled CoreML model, so they become immediately searchable without shipping a new `embeddings_index.json`.
+
+### Configurable model architectures
+
+Support pluggable teacher/student model pairs beyond E5, including models with different tokenizers (BPE, WordPiece) and embedding dimensions.
+
+### CI version matrix
+
+Automated testing of `ssk export` against multiple library version combinations to catch breakages early when dependencies update.
+
 ## License
 
 MIT. See [NOTICES](NOTICES) for third-party attributions.
