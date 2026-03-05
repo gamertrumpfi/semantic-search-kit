@@ -43,16 +43,14 @@ jobs:
           cache: "pip"
           cache-dependency-path: cli/pyproject.toml
 
-      - name: Install dependencies
-        run: pip install -e ./cli
+      - name: Install lint & validation deps
+        run: pip install ruff pydantic typing_extensions
 
       - name: Lint (ruff)
-        run: |
-          pip install ruff
-          ruff check cli/ssk/
+        run: ruff check cli/ssk/
 
       - name: Compile check
         run: python -m py_compile cli/ssk/*.py
 
       - name: Validate schemas
-        run: python -c "from ssk.schema import CorpusFile, QueriesFile; print('Schema imports OK')"
+        run: PYTHONPATH=cli python -c "from ssk.schema import CorpusFile, QueriesFile; print('Schema imports OK')"
