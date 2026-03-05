@@ -1,7 +1,7 @@
 # Swift
 .build/
 .swiftpm/
-Package.resolved
+swift-package/
 *.xcodeproj
 xcuserdata/
 DerivedData/

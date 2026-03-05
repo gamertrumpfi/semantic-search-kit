@@ -198,7 +198,7 @@ The training pipeline uses dual-loss knowledge distillation:
 | Component | Requirement |
 |-----------|-------------|
 | Swift Package | iOS 16+, macOS 13+, Swift 6.0 |
-| Python CLI | Python 3.10+, torch 2.4, transformers 4.57, coremltools 8.1, numpy 1.26 |
+| Python CLI | Python 3.10+, torch 2.0+, transformers 4.40+, coremltools 7.0+, numpy 1.24+ |
 
 ## Project Structure
 
